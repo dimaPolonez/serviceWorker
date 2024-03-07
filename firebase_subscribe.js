@@ -16,7 +16,7 @@ if ('Notification' in window) {
 
     // по клику, запрашиваем у пользователя разрешение на уведомления
     // и подписываем его
-    $('#subscribe').on('click', function () {
+    document.getElementById('subscribe').addEventListener('click', function() {
         subscribe();
     });
 }
@@ -24,10 +24,10 @@ if ('Notification' in window) {
 function subscribe() {
     // запрашиваем разрешение на получение уведомлений
     messaging.requestPermission()
-        .then(function () {
+        .then(function() {
             // получаем ID устройства
             messaging.getToken()
-                .then(function (currentToken) {
+                .then(function(currentToken) {
                     console.log(currentToken);
 
                     if (currentToken) {
@@ -37,14 +37,14 @@ function subscribe() {
                         setTokenSentToServer(false);
                     }
                 })
-                .catch(function (err) {
+                .catch(function(err) {
                     console.warn('При получении токена произошла ошибка.', err);
                     setTokenSentToServer(false);
                 });
-    })
-    .catch(function (err) {
-        console.warn('Не удалось получить разрешение на показ уведомлений.', err);
-    });
+        })
+        .catch(function(err) {
+            console.warn('Не удалось получить разрешение на показ уведомлений.', err);
+        });
 }
 
 // отправка ID на сервер
@@ -53,11 +53,19 @@ function sendTokenToServer(currentToken) {
         console.log('Отправка токена на сервер...');
 
         var url = ''; // адрес скрипта на сервере который сохраняет ID устройства
-        $.post(url, {
-            token: currentToken
+        fetch(url, {
+            method: 'POST',
+            body: JSON.stringify({ token: currentToken }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(function() {
+            setTokenSentToServer(currentToken);
+        })
+        .catch(function(error) {
+            console.error('Ошибка при отправке токена на сервер:', error);
         });
-
-        setTokenSentToServer(currentToken);
     } else {
         console.log('Токен уже отправлен на сервер.');
     }
