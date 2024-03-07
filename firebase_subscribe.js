@@ -1,6 +1,14 @@
-// firebase_subscribe.js
+document.addEventListener('DOMContentLoaded', function() {
+    var subscribeButton = document.getElementById('subscribe');
+    if (subscribeButton) {
+        subscribeButton.addEventListener('click', function() {
+            subscribe();
+        });
+    }
+});
+
 firebase.initializeApp({
-    messagingSenderId: '<SENDER_ID>'
+    messagingSenderId: '523978386548'
 });
 
 // браузер поддерживает уведомления
