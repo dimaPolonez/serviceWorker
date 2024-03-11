@@ -1,8 +1,15 @@
 document.addEventListener('DOMContentLoaded', function() {
     var subscribeButton = document.getElementById('subscribe');
+    var unsubscribeButton = document.getElementById('unsubscribe');
     if (subscribeButton) {
         subscribeButton.addEventListener('click', function() {
             subscribe();
+        });
+    }
+
+    if (unsubscribeButton) {
+        unsubscribeButton.addEventListener('click', function() {
+            unsubscribe();
         });
     }
 });
@@ -27,6 +34,11 @@ if ('Notification' in window) {
     document.getElementById('subscribe').addEventListener('click', function() {
         subscribe();
     });
+
+    // Добавляем обработчик события на клик по кнопке "Отписаться и очистить Local Storage"
+document.getElementById('unsubscribe').addEventListener('click', function() {
+    unsubscribe();
+});
 }
 
 function subscribe() {
@@ -79,7 +91,7 @@ function sendTokenToServer(currentToken) {
     }
 }
 
-function unsubscribeAndClearLocalStorage() {
+function unsubscribe() {
     // Получаем ID устройства из Local Storage
     var currentToken = localStorage.getItem('sentFirebaseMessagingToken');
 
@@ -110,11 +122,6 @@ function unsubscribeAndClearLocalStorage() {
         console.warn('Не найден токен устройства в Local Storage.');
     }
 }
-
-// Добавляем обработчик события на клик по кнопке "Отписаться и очистить Local Storage"
-document.getElementById('unsubscribeAndClearLocalStorage').addEventListener('click', function() {
-    unsubscribeAndClearLocalStorage();
-});
 
 // используем localStorage для отметки того,
 // что пользователь уже подписался на уведомления
