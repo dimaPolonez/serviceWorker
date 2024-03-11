@@ -55,6 +55,17 @@ function subscribe() {
         });
 }
 
+function clearLocalStorage() {
+    localStorage.clear(); // Метод clear() удаляет все элементы из Local Storage
+    alert('Local Storage очищен!');
+}
+
+// Найти кнопку по ID
+var clearButton = document.getElementById('clearLocalStorageButton');
+
+// Добавить обработчик события на клик по кнопке
+clearButton.addEventListener('click', clearLocalStorage);
+
 // отправка ID на сервер
 function sendTokenToServer(currentToken) {
     if (!isTokenSentToServer(currentToken)) {
