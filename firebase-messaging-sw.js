@@ -6,7 +6,7 @@ self.importScripts('https://www.gstatic.com/firebasejs/3.6.8/firebase-messaging.
 
 // Инициализируем Firebase с идентификатором отправителя
 firebase.initializeApp({
-    messagingSenderId: '6458736752'
+    messagingSenderId: '1035565280105'
 });
 
 // Получаем объект messaging

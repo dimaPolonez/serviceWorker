@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 firebase.initializeApp({
-    messagingSenderId: '6458736752'
+    messagingSenderId: '1035565280105'
 });
 
 // браузер поддерживает уведомления
