@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 firebase.initializeApp({
-    messagingSenderId: '523978386548'
+    messagingSenderId: '6458736752'
 });
 
 // браузер поддерживает уведомления
@@ -88,38 +88,6 @@ function sendTokenToServer(currentToken) {
         });
     } else {
         console.log('Токен уже отправлен на сервер.');
-    }
-}
-
-function unsubscribe() {
-    // Получаем ID устройства из Local Storage
-    var currentToken = localStorage.getItem('sentFirebaseMessagingToken');
-
-    // Очищаем Local Storage
-    localStorage.removeItem('sentFirebaseMessagingToken');
-
-    // Удаляем устройство из Firestore
-    if (currentToken) {
-        var url = ''; // Адрес скрипта на сервере для удаления устройства из Firestore
-        fetch(url, {
-            method: 'POST',
-            body: JSON.stringify({ token: currentToken }),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(function(response) {
-            if (response.ok) {
-                console.log('Устройство удалено из Firestore.');
-            } else {
-                console.error('Ошибка при удалении устройства из Firestore:', response.statusText);
-            }
-        })
-        .catch(function(error) {
-            console.error('Ошибка при отправке запроса на удаление устройства из Firestore:', error);
-        });
-    } else {
-        console.warn('Не найден токен устройства в Local Storage.');
     }
 }
 
